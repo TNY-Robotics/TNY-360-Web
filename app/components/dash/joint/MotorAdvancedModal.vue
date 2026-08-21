@@ -28,7 +28,7 @@
                             {{ adcVoltages[adcVoltages.length - 1]?.toFixed(2) ?? 'N/A' }} V
                         </div>
                     </div>
-                    <ValueChart :values="adcVoltages ?? []" :range="[0, 3.3]" class="h-48" />
+                    <DashValueChart :values="adcVoltages ?? []" :range="[0, 3.3]" class="h-48" />
                 </div>
             </div>
         </template>

@@ -1,7 +1,7 @@
 <template>
     <div ref="container" class="flex flex-col space-y-2 grow bg-slate-200 dark:bg-slate-900 rounded-lg p-2 min-h-0 max-h-full overflow-y-auto">
         <div class="flex grow min-h-0 -my-0.5" />
-        <LogLine v-for="(line, index) in logs" :key="index" :line="line" />
+        <DashLogLine v-for="(line, index) in logs" :key="index" :line="line" />
     </div>
 </template>
 

@@ -6,7 +6,7 @@
             </div>
             <div class="flex flex-col lg:flex-row justify-evenly">
                 <div v-for="joint in leg.joints" :key="joint.driverIndex" class="p-4">
-                    <JointControlBox :driverIndex="joint.driverIndex" :readerIndex="joint.readerIndex" :name="joint.name" :range="joint.range" :shouldUpdate="shouldUpdate" v-model:blockUpdates="joint.blockUpdates" />
+                    <DashJointControlBox :driverIndex="joint.driverIndex" :readerIndex="joint.readerIndex" :name="joint.name" :range="joint.range" :shouldUpdate="shouldUpdate" v-model:blockUpdates="joint.blockUpdates" />
                 </div>
             </div>
         </div>
@@ -14,10 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { LegJointFlag } from '@tny-robotics/sdk';
-
-const robot = useTNY360();
-
 const shouldUpdate = ref(true);
 const joints = reactive([
     {

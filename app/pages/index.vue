@@ -1,12 +1,13 @@
 <template>
     <div class="flex flex-col min-h-dvh min-w-full max-w-full max-h-dvh w-full h-dvh overflow-hidden p-4 lg:p-8">
-        <p class="text-center show-up text-6xl font-extrabold"> TNY - 360 </p>
-        <p class="text-center show-up text-lg text-gray-600 dark:text-gray-300"> Welcome on the TNY-360 Web Portal!</p>
+        <p class="text-center show-up text-6xl font-extrabold"> TNY-360 </p>
+        <p class="text-center show-up text-lg text-gray-600 dark:text-gray-300"> Welcome to the TNY-360 Web Interface!</p>
         <div class="flex grow justify-center items-center">
-            <div class="flex flex-col space-y-8 h-fit w-fit justify-center items-center">
-                <UButton class="show-up delay-200 flex justify-between w-fit" size="xl" variant="subtle" href="/teleop" label="Jouer avec mon TNY-360" icon="lucide:gamepad-2" />
-                <UButton class="show-up delay-400 flex justify-between w-fit" size="xl" variant="subtle" href="/dashboard" label="Programmer mon TNY-360" icon="lucide:chart-no-axes-gantt" disabled color="neutral" />
-                <UButton class="show-up delay-600 flex justify-between w-fit" size="xl" variant="subtle" href="/dashboard" label="Voir le Panneau de Contrôle" icon="lucide:gauge" />
+            <div class="grid grid-cols-2 grid-rows-2 gap-8 h-fit w-full justify-center items-center">
+                <BigButton class="show-up delay-200" href="/teleop" label="Play with my TNY-360" icon="lucide:gamepad-2" />
+                <BigButton class="show-up delay-400" href="/animator" label="Animate my TNY-360" icon="lucide:play" disabled color="neutral" />
+                <BigButton class="show-up delay-600" href="/coder" label="Program my TNY-360" icon="lucide:square-terminal" disabled color="neutral" />
+                <BigButton class="show-up delay-800" href="/dash" label="View Control Panel" icon="lucide:gauge" />
             </div>
         </div>
         <div class="flex w-full justify-between">

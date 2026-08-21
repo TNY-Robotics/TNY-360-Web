@@ -7,14 +7,14 @@
                     <div class="flex space-x-8 p-2">
                         <div>
                             <p>Core 0</p>
-                            <BarChart class="w-32"
+                            <DashBarChart class="w-32"
                                 :nbars="10" direction="vertical" :size="2" v-model="stats.cpu_usage.core0_percent.value"
                             />
                             <p class="text-center w-full"> {{Math.round(stats?.cpu_usage.core0 * 100)}} % </p>
                         </div>
                         <div>
                             <p>Core 1</p>
-                            <BarChart class="w-32"
+                            <DashBarChart class="w-32"
                                 :nbars="10" direction="vertical" :size="2" v-model="stats.cpu_usage.core1_percent.value"
                             />
                             <p class="text-center w-full"> {{Math.round(stats?.cpu_usage.core1 * 100)}} % </p>
@@ -26,14 +26,14 @@
                     <div class="flex space-x-8 p-2">
                         <div>
                             <p>Internal</p>
-                            <BarChart class="w-32"
+                            <DashBarChart class="w-32"
                                 :nbars="10" direction="vertical" :size="2" v-model="stats.ram_usage.internal_percent.value"
                             />
                             <p class="text-center w-full"> {{formatRAM(stats?.ram_usage.internal_used)}} / {{ formatRAM(stats?.ram_usage.internal_total) }} </p>
                         </div>
                         <div>
                             <p>PSRAM</p>
-                            <BarChart class="w-32"
+                            <DashBarChart class="w-32"
                                 :nbars="10" direction="vertical" :size="2" v-model="stats.ram_usage.psram_percent.value"
                             />
                             <p class="text-center w-full"> {{formatRAM(stats?.ram_usage.psram_used)}} / {{ formatRAM(stats?.ram_usage.psram_total) }} </p>
@@ -54,7 +54,7 @@
                     <UButton label="Clear" variant="solid" color="error" @click="clearLogs" />
                 </div>
             </div>
-            <LogTerminal ref="logTerminal" class="min-h-32" />
+            <DashLogTerminal ref="logTerminal" class="min-h-32" />
         </div>
     </div>
 </template>

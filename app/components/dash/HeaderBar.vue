@@ -4,8 +4,7 @@
             <div class="flex justify-start items-center w-16 lg:w-fit">
                 <UButton icon="lucide:arrow-left" size="xl" variant="ghost" color="neutral" @click="goBack" />
             </div>
-            <h1 class="text-2xl font-black py-2 px-2 whitespace-nowrap"> TNY-360 </h1>
-            <p class="text-lg px-2 italic font-light text-slate-600 dark:text-slate-500 whitespace-nowrap"> Dashboard </p>
+            <h1 class="text-2xl font-black py-2 px-2 whitespace-nowrap"> TNY-Dash </h1>
             <div class="flex lg:hidden justify-end items-center w-16 lg:w-fit">
                 <UButton icon="lucide:menu" size="xl" variant="ghost" color="neutral" @click="toggleMobileMenu" />
             </div>
@@ -36,7 +35,7 @@
     </div>
     <UModal v-model:open="settingsModalOpen" :title="'Settings'" :fullscreen="true">
         <template #body>
-            <SettingsModal />
+            <DashSettingsModal />
         </template>
     </UModal>
 </template>
@@ -45,11 +44,11 @@
 const router = useRouter();
 
 const pages = [
-    { name: 'Home', path: '/dashboard/' },
-    { name: 'Joints', path: '/dashboard/joints' },
-    { name: 'Movements', path: '/dashboard/movements' },
-    { name: 'View', path: '/dashboard/view' },
-    { name: 'Advanced', path: '/dashboard/advanced' },
+    { name: 'Home', path: '/dash/' },
+    { name: 'Joints', path: '/dash/joints' },
+    { name: 'Movements', path: '/dash/movements' },
+    { name: 'View', path: '/dash/view' },
+    { name: 'Advanced', path: '/dash/advanced' },
 ];
 const selected = (path: string) => {
     return path === useRoute().path || path === useRoute().path + '/';

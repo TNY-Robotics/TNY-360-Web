@@ -42,8 +42,8 @@
             </div>
         </div>
     </div>
-    <JointCalibrationModal :index="driverIndex" :name="name" v-model:open="calibrationModalOpen" />
-    <JointMotorAdvancedModal :driverIndex="driverIndex" :readerIndex="readerIndex" :name="name" v-model:open="advancedModalOpen" />
+    <DashJointCalibrationModal :index="driverIndex" :name="name" v-model:open="calibrationModalOpen" />
+    <DashJointMotorAdvancedModal :driverIndex="driverIndex" :readerIndex="readerIndex" :name="name" v-model:open="advancedModalOpen" />
 </template>
 
 <script lang="ts" setup>
