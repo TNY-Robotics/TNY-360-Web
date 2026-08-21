@@ -1,5 +1,3 @@
-![Banner](./Extras/banner.png)
-
 <div align="center">
 
 # TNY-360 Web Interface
