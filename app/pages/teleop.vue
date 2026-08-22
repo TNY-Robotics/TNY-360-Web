@@ -65,9 +65,9 @@
         </div>
 
         <!-- LEFT JOYSTICK : MOVE X, Y -->
-        <Joystick class="absolute bottom-0 left-0 w-64 h-64" v-model="joyLeft" />
+        <TeleopJoystick class="absolute bottom-0 left-0 w-64 h-64" v-model="joyLeft" />
         <!-- RIGHT JOYSTICK : ROTATE Z + LOOK UP/DOWN -->
-        <Joystick class="absolute bottom-0 right-0 w-64 h-64" v-model="joyRight" />
+        <TeleopJoystick class="absolute bottom-0 right-0 w-64 h-64" v-model="joyRight" />
     </div>
 </template>
 

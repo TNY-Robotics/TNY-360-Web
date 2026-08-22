@@ -6,7 +6,7 @@
             <div class="grid grid-cols-2 grid-rows-2 gap-8 h-fit w-full justify-center items-center">
                 <BigButton class="show-up delay-200" href="/teleop" label="Play with my TNY-360" icon="lucide:gamepad-2" />
                 <BigButton class="show-up delay-400" href="/animator" label="Animate my TNY-360" icon="lucide:play" disabled color="neutral" />
-                <BigButton class="show-up delay-600" href="/coder" label="Program my TNY-360" icon="lucide:square-terminal" disabled color="neutral" />
+                <BigButton class="show-up delay-600" href="/coder" label="Program my TNY-360" icon="lucide:square-terminal" />
                 <BigButton class="show-up delay-800" href="/dash" label="View Control Panel" icon="lucide:gauge" />
             </div>
         </div>

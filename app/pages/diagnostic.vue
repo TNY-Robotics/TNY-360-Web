@@ -211,7 +211,7 @@ async function onStepClicked(step: any) {
 }
 
 async function rebootRobot() {
-    await robot.value?.system.reboot();
+    await robot.value?.diagnostic.rebootInNormalMode();
 }
 
 </script>
