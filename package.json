@@ -16,6 +16,7 @@
     "@tresjs/nuxt": "^5.1.7",
     "@unovis/ts": "^1.6.2",
     "@unovis/vue": "^1.6.2",
+    "blockly": "^13.2.1",
     "nuxt": "^4.3.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0",

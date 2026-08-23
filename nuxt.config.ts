@@ -29,6 +29,19 @@ export default defineNuxtConfig({
           inlineDynamicImports: true, // Only one js file, easier for embedded systems
         }
       }
+    },
+    optimizeDeps: {
+      include: [
+        '@tny-robotics/sdk',
+        '@tresjs/core',
+        '@unovis/vue',
+        'blockly',
+        'blockly/javascript',
+        'three',
+        'three/examples/jsm/controls/OrbitControls.js',
+        'three/examples/jsm/loaders/GLTFLoader.js',
+        'three/src/math/MathUtils',
+      ]
     }
   },
   icon: {
