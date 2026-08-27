@@ -47,8 +47,8 @@ const pages = [
     { name: 'Home', path: '/dash/' },
     { name: 'Joints', path: '/dash/joints' },
     { name: 'Movements', path: '/dash/movements' },
-    { name: 'View', path: '/dash/view' },
-    { name: 'Advanced', path: '/dash/advanced' },
+    { name: '3D View', path: '/dash/view' },
+    { name: 'Files', path: '/dash/explorer' },
 ];
 const selected = (path: string) => {
     return path === useRoute().path || path === useRoute().path + '/';

@@ -14,7 +14,7 @@ body {
     @apply flex min-h-dvh;
 }
 
-* {
+body {
     font-family: 'PoppinsWeb', Helvetica, sans-serif;
 }
 

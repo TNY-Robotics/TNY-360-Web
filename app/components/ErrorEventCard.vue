@@ -7,7 +7,7 @@
             <h3> Linked Events : </h3>
             <div class="flex flex-col gap-4 p-4">
                 <div v-if="linkedEvents === undefined" class="flex justify-center items-center">
-                    <UIcon name="lucide:loader-2" class="animate-spin w-8 h-8 text-gray-500 dark:text-gray-400" />
+                    <UIcon name="lucide:loader-2" class="animate-spin w-8 h-8 text-slate-500 dark:text-slate-400" />
                 </div>
                 <ApiError class="show-up" v-for="event in linkedEvents" :key="event.eventId" :errorCode="formatErrorCode(event)" :payload="event.payload" />
             </div>

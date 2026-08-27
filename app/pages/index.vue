@@ -47,9 +47,26 @@
             </div>
         </template>
     </UModal>
+    <UModal v-model:open="errorsPopupOpen" title="Errors Detected">
+        <template #body>
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <p> Your robot seems to have reported errors. </p>
+                </div>
+                <p> Do you want to take a look at them? </p>
+            </div>
+        </template>
+        <template #footer>
+            <div class="flex justify-between w-full space-x-4">
+                <UButton variant="link" color="neutral" label="No" @click="closeErrorsPopup" />
+                <UButton variant="solid" color="primary" label="View Errors" icon="lucide:arrow-right" trailing @click="goToErrors" :loading="errorsBtnLoading" />
+            </div>
+        </template>
+    </UModal>
 </template>
 
 <script lang="ts" setup>
+import type { TNY360 } from '@tny-robotics/sdk';
 import { MotorCalibrationState, MotorId } from '@tny-robotics/sdk';
 
 const robot = useTNY360();
@@ -57,20 +74,48 @@ const router = useRouter();
 
 const calibrationPopupOpen = ref(false);
 
+async function checkForDiagnosticMode(tny: TNY360) {
+    const diagEnabled = await tny.diagnostic.isEnabled();
+    if (diagEnabled) {
+        router.replace('diagnostic');
+        return true;
+    }
+    return false;
+}
+
+async function checkForCalibration(tny: TNY360) {
+    const promises = Array.from({ length: 12 }, (_, i) => tny.motor.getCalibrationState(i as MotorId));
+    const calibStates = await Promise.all(promises);
+    const hasUncalibrated = calibStates.some(state => state !== MotorCalibrationState.Calibrated);
+    console.groupEnd();
+    if (hasUncalibrated) {
+        calibrationPopupOpen.value = true;
+        return true;
+    }
+    return false;
+}
+
+async function checkForErrors(tny: TNY360) {
+    return new Promise<boolean>(async (resolve) => {
+        const nb_errors = await tny.error.getErrorCount();
+        console.groupEnd();
+        if (nb_errors > 0) {
+            errorsPopupOpen.value = true;
+            errorsPopupClosedCallback = () => {
+                resolve(false);
+            };
+            return;
+        }
+        resolve(false);
+    });
+}
+
 watch(robot, async (tny) => {
     if (!tny) return;
     tny.on('connected', async () => {
-        // check for diagnostic mode
-        const diagEnabled = await tny.diagnostic.isEnabled();
-        if (diagEnabled) {
-            router.replace('diagnostic');
-            return;
-        }
-        // check for uncalibrated state
-        const promises = Array.from({ length: 12 }, (_, i) => tny.motor.getCalibrationState(i as MotorId));
-        const calibStates = await Promise.all(promises);
-        const hasUncalibrated = calibStates.some(state => state !== MotorCalibrationState.Calibrated);
-        if (hasUncalibrated) calibrationPopupOpen.value = true;
+        if (await checkForErrors(tny)) return;
+        if (await checkForDiagnosticMode(tny)) return;
+        if (await checkForCalibration(tny)) return;
     });
 }, { immediate: true });
 
@@ -88,6 +133,28 @@ async function onDiagModeReboot() {
     diagnosticPopupOpen.value = false;
     window.close();
 }
+
+const errorsPopupOpen = ref(false);
+const errorsBtnLoading = ref(false);
+let errorsPopupClosedCallback: any = null;
+function goToErrors() {
+    errorsBtnLoading.value = true;
+    router.push('errors');
+}
+function closeErrorsPopup() {
+    errorsPopupOpen.value = false;
+    if (errorsPopupClosedCallback !== null) {
+        errorsPopupClosedCallback();
+        errorsPopupClosedCallback = null;
+    }
+}
+
+onMounted(async () => {
+    if (!robot.value) return;
+    if (await checkForErrors(robot.value)) return;
+    if (await checkForDiagnosticMode(robot.value)) return;
+    if (await checkForCalibration(robot.value)) return;
+});
 
 </script>
 
