@@ -4,6 +4,20 @@
             <p class="text-center show-up text-4xl font-bold"> Diagnostic </p>
             <p class="text-center show-up text-lg text-gray-600 dark:text-gray-300"> Let's see if your TNY-360 is in good health! </p>
         </div>
+        <div class="absolute top-0 right-0 p-2">
+            <UButton class="w-fit" size="sm" variant="subtle" @click="() => { skipModalOpen = true; }" label="Skip" icon="lucide:chevrons-right" trailing />
+            <UModal v-model:open="skipModalOpen" title="Skip Diagnostic">
+                <template #body>
+                    Skip diagnostic and boot into normal mode ?
+                </template>
+                <template #footer>
+                    <div class="flex w-full justify-between">
+                        <UButton @click="() => { skipModalOpen = false; }" label="Cancel" variant="link" color="neutral" />
+                        <UButton @click="skipDiagnostic" label="Yes, skip" variant="solid" :loading="rebootLoading" />
+                    </div>
+                </template>
+            </UModal>
+        </div>
         <div class="show-up delay-200 flex justify-center items-center w-full">
             <UButton class="w-fit" size="xl" variant="subtle" @click="startDiagnostic" label="Start Diagnostic" icon="lucide:play" :loading="startDiagnosticButtonLoading" />
         </div>
@@ -210,8 +224,18 @@ async function onStepClicked(step: any) {
     stepErrorModalOpen.value = true;
 }
 
+const skipModalOpen = ref(false);
+async function skipDiagnostic() {
+    await rebootRobot();
+    skipModalOpen.value = false;
+    window.close() // might fail, but if it works that's good
+}
+
+const rebootLoading = ref(false);
 async function rebootRobot() {
+    rebootLoading.value = true;
     await robot.value?.diagnostic.rebootInNormalMode();
+    rebootLoading.value = false;
 }
 
 </script>
